@@ -1,0 +1,17 @@
+﻿<?hda jcharset="UTF8" encoding="utf-8"?>
+@Properties LocalData
+blDateFormat=M/d{/yy}{ h:mm[:ss]{ a}}!mAM,PM!tAsia/Calcutta
+@end
+@ResultSet Manifest
+2
+entryType
+location
+component
+LookupWorkdayRecords/LookupWorkdayRecords.hda
+componentExtra
+LookupWorkdayRecords/readme.txt
+componentClasses
+LookupWorkdayRecords/classes/
+componentLib
+LookupWorkdayRecords/lib/
+@end

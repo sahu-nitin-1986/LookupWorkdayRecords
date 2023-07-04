@@ -1,0 +1,65 @@
+﻿<?hda jcharset="UTF8" encoding="utf-8"?>
+@Properties LocalData
+ComponentName=LookupWorkdayRecords
+blDateFormat=M/d{/yy}{ h:mm[:ss]{ a}}!mAM,PM!tAsia/Calcutta
+classpath=$COMPONENT_DIR/classes
+hasInstallStrings=false
+hasPreferenceData=0
+preventAdditionalComponentDowngrade=0
+version=2022_05_29-dev(build 1)
+@end
+@ResultSet Filters
+4
+type
+location
+parameter
+loadOrder
+@end
+@ResultSet MergeRules
+4
+fromTable
+toTable
+column
+loadOrder
+LookupWorkdayRecords_ServiceHandlers
+ServiceHandlers
+null
+10
+LookupWorkdayRecords_Templates
+IntradocTemplates
+name
+10
+@end
+@ResultSet ResourceDefinition
+4
+type
+filename
+tables
+loadOrder
+resource
+resources/lookupworkdayrecords_resource.htm
+null
+10
+query
+resources/lookupworkdayrecords_query.htm
+LookupWorkdayRecords_Queries
+10
+template
+templates/lookupworkdayrecords_template.hda
+null
+10
+service
+resources/lookupworkdayrecords_service.htm
+LookupWorkdayRecords_Services
+10
+environment
+lookupworkdayrecords_environment.cfg
+null
+10
+@end
+@ResultSet ClassAliases
+3
+classname
+location
+loadOrder
+@end

@@ -1,0 +1,210 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>
+LookupWorkdayRecords staticResTable</title></head>
+<body>
+
+<@table LookupWorkdayRecords_ServiceHandlers@>
+<table border=1><caption><strong>
+
+<tr>
+<td>serviceName</td><td>handler</td><td>searchOrder</td>
+</tr>
+
+<tr>
+<td>Service</td><td>com.pkg.service.LookupWorkdayRecordsService</td><td>10</td>
+</tr>
+</table>
+
+<@end@>
+
+
+
+<@dynamichtml std_html_head_declarations@>
+
+<$include super.std_html_head_declarations$>
+
+
+		<script type="text/javascript">
+		
+		
+
+
+		//action Method call when Lookup button Click
+		function externalLookup() {
+		
+		
+			var input = document.getElementsByName("xIPM_APP_1_0")[0].value;
+			if (input.trim().length > 0) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onload  = function() {
+					if (this.status == 200) {
+						debugger;
+						//alert("call");
+						var obj = JSON.parse(this.responseText);
+						objRow = obj.WorkDayData[0];
+						console.log(objRow.ASSOCIATE_ID + " " + objRow.ASSOCIATE_NAME);
+						
+						//Setup Fields Value
+					/*	setMetaDataFieldValue("xIPM_APP_1_1", objRow.ASSOCIATE_NAME);
+						setMetaDataFieldValue("xIPM_APP_1_2", objRow.SSN);
+						setMetaDataFieldValue("xIPM_APP_1_4", objRow.TERM_DATE);
+						setMetaDataFieldValue("xIPM_APP_1_5", objRow.COST_CENTER);
+						setMetaDataFieldValue("xIPM_APP_1_6", objRow.BUSINESS_UNIT_CODE);
+						setMetaDataFieldValue("xIPM_APP_1_9", objRow.LITIGATION_HOLD);
+						setMetaDataFieldValue("xIPM_APP_1_10", objRow.HR_FLAG);
+						setMetaDataFieldValue("xIPM_APP_1_11", objRow.PAYROLL_FLAG);
+						setMetaDataFieldValue("xIPM_APP_1_12", objRow.COMPANY_CODE);
+						setMetaDataFieldValue("xIPM_APP_1_13", objRow.CORP_FLAG);
+						setMetaDataFieldValue("xIPM_APP_1_18", objRow.MANAGEMENT_LEVEL);
+						setMetaDataFieldValue("xIPM_APP_1_19", objRow.JOB_FAMILY);
+						setMetaDataFieldValue("xIPM_APP_1_20", objRow.JOB_CATEGORY);
+						setMetaDataFieldValue("xIPM_APP_1_21", objRow.LASTDAYOFWORK);
+						setMetaDataFieldValue("xIPM_APP_1_22", objRow.PEOPLESOFTSTATUS);
+						setMetaDataFieldValue("xIPM_APP_1_23", objRow.JOBCODE);
+						setMetaDataFieldValue("xIPM_APP_1_24", objRow.JOBTITLE); */
+						
+						setMetaDataFieldValue("xIPM_APP_1_1", objRow.ASSOCIATE_NAME);
+						
+					}
+				};
+				xhttp.open("GET", "/cs/idcplg?IdcService=LookupWorkdayRecords&associate_id=" + input + "&idcToken=<$idcToken$>", true);
+				xhttp.send();
+
+			} else {
+
+				alert("Please enter Associate Id to lookup data..")
+
+			}
+
+		}
+			
+
+		</script>
+		
+		
+		<script type="text/javascript">
+		
+		  function insertAfter(referenceNode, newNode) {
+			 referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+		  }
+		
+		function addButton() {
+		
+			//Create an input type dynamically.
+			var element = document.createElement("input");
+
+			//Assign different attributes to the element.
+			element.setAttribute("type", "button");
+			element.setAttribute("id", "lookup");
+			element.setAttribute("name", "lookup");
+			element.setAttribute("value", "Lookup");
+			element.onclick = externalLookup;
+			
+			//element.setAttribute("onclick", "externalLookup();");
+		    //element.addEventListener("click", externalLookup);
+
+			var foo = document.getElementsByName("xIPM_APP_1_0")[0];
+			if (foo.type == "text"){
+				insertAfter(foo,element);
+			}
+			
+			element.addEventListener("click", externalLookup);	
+
+		}
+
+
+		function setMetaDataFieldValue(fieldName, fieldValue) {
+			setValueInfoField(document.getElementsByName(fieldName)[0], fieldValue);
+			setValueInHiddenField(document.getElementById(fieldName + "_value"), fieldValue);
+
+		}
+
+		function setValueInHiddenField(element, elementValue) {
+			debugger;
+			if (checkElementExists(element)) {
+				element.value = elementValue;
+			}
+		}
+
+		function setValueInfoField(element, elementValue) {
+
+			if (checkElementExists(element)) {
+			   if(element.type =="span")
+					element.innerHTML= elementValue;
+			   else
+					element.value = elementValue;
+			}
+
+		}
+
+		function checkElementExists(element) {
+			if (typeof(element) != 'undefined' && element != null) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+		
+
+        var myVar = setInterval(myTimer, 1000);
+		
+
+		function myTimer() {
+		   addButton();
+		   clearInterval(myVar);
+		   
+		}
+		
+		</script>
+		
+		<style type="text/css">
+		
+		#lookup{
+		margin-left: 7px;
+		
+		}
+		
+		</style>
+
+
+
+<@end@>
+
+
+<@dynamichtml std_tree_control_edit_entry@>
+		<$editEntryName = fieldName$>
+		<$inputFieldId = fieldId$>
+		<$if isStrictList or usesDisplayLabel$>
+			[[% The variable fieldId will point to a popup link defined later %]]
+			<$inputFieldId = inputFieldId & "_hidden"$>
+			<$disabledInputFieldId = fieldId & "_disabled"$>
+			<input type="hidden"  name="<$editEntryName$>" id="<$inputFieldId$>" value="<$xml(fieldValue)$>" />
+			<$if not usesDisplayLabel$>
+			<input type="text"  id="<$disabledInputFieldId$>"  size="<$fieldEditWidth$>" value="<$xml(fieldValue)$>" disabled="disabled" />
+			<$endif$>
+		<$else$>
+			<input type="text"  name="<$editEntryName$>" id="<$fieldId$>" size="<$fieldEditWidth$>"
+				<$if fieldMaxLength and isEditMode$>maxlength="<$fieldMaxLength$>"<$endif$>
+				value="<$xml(fieldValue)$>" <$include text_field_enter_for_search$> /><td>
+		<$endif$>
+		<$if usesDisplayLabel$>
+			<$include std_select_entry_special_selections$>
+		<$endif$>
+<@end@>
+
+
+<@dynamichtml std_nameentry_row@>
+
+<tr test="<$fieldEntryInclude$>" <$strTrimWs(inc("std_nameentry_row_attributes"))$>>
+	<td class="idcFieldCaption<$if isInfo$> idcInfoCaption<$elseif isQuery and isTrue(isQuery)$> idcQueryCaption<$else$> idcCheckinUpdateCaption<$endif$><$if idcFieldCaptionExtraClass$> <$idcFieldCaptionExtraClass$><$endif$>" <$if isInfo$> align=<$lineEndAlignment$><$endif$>><$strTrimWs(inc(fieldCaptionInclude))$></td>
+	<$if not excludeStdFieldEntry$>
+	<td <$if isFieldInfoOnly and isQuery and isTrue(isQuery)$>colspan="4"<$endif$> class="idcFieldEntry <$if isInfo$> idcInfoEntry<$elseif isQuery$> idcQueryEntry<$else$> idcCheckinUpdateEntry<$endif$>"><$inc(fieldEntryInclude)$></td>
+	<$endif$>
+</tr>
+<@end@>
+
+</body>
+</html>

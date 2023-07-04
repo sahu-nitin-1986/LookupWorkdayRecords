@@ -1,0 +1,14 @@
+﻿<$loop DRSWorkdayRecords$>
+{"WorkDayData":[ {
+<$count = 0, num = rsNumFields("DRSWorkdayRecords")$>
+
+    <$loopwhile count < num$>
+        <$fieldName=rsFieldByIndex("DRSWorkdayRecords", count)$>
+        "<$fieldName$>":"<$getValue("DRSWorkdayRecords", fieldName)$>"
+		<$ if count < num-1 $>
+		,
+		<$endif$>
+        <$count = count + 1$>
+    <$endloop$>
+<$endloop$>
+ }]}
